@@ -1,12 +1,12 @@
-# Etapa de build
-FROM node:18 AS build
+FROM node:20 AS build
 WORKDIR /app
-COPY frontend/package*.json ./
+
+COPY package*.json ./
 RUN npm install
-COPY frontend/ .
+
+COPY . .
 RUN npm run build --prod
 
-# Etapa de execução
 FROM nginx:stable-alpine
-COPY --from=build /app/dist/* /usr/share/nginx/html
+COPY --from=build /app/dist/ /usr/share/nginx/html
 EXPOSE 80

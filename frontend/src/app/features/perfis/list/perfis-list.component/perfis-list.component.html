@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <div class="header">
+    <h2>Perfis</h2>
+    <button [routerLink]="['/perfis/form']">Novo Perfil</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let perfil of perfis">
+        <td>{{ perfil.id }}</td>
+        <td>{{ perfil.descricao }}</td>
+        <td>
+          <button [routerLink]="['/perfis/form', perfil.id]">Editar</button>
+          <button *ngIf="perfil.id !== undefined" (click)="confirmarExclusao(perfil.id)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

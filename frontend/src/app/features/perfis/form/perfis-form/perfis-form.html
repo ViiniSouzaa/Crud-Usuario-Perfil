@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="descricao">Descrição</label>
+    <input id="descricao" type="text" formControlName="descricao" />
+    <div *ngIf="form.get('descricao')?.invalid && form.get('descricao')?.touched">
+      <small *ngIf="form.get('descricao')?.errors?.['required']">Descrição é obrigatória.</small>
+      <small *ngIf="form.get('descricao')?.errors?.['minlength']">Mínimo 5 caracteres.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ isEdit ? 'Atualizar' : 'Salvar' }}
+  </button>
+</form>

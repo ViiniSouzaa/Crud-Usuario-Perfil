@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="header">
+    <h2>Usuários</h2>
+    <button [routerLink]="['/usuarios/form']">Novo Usuário</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Perfis</th>
+        <th>Acoes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nome }}</td>
+        <td>
+          <span *ngIf="!usuario.perfis">Sem perfil</span>
+          <span *ngFor="let perfil of usuario.perfis || []" class="badge text-bg-primary me-1">
+            {{ perfil.descricao }}
+          </span>
+        </td>
+        <td>
+          <button [routerLink]="['/usuarios/form', usuario.id]">Editar</button>
+          <button *ngIf="usuario.id !== undefined" (click)="confirmarExclusao(usuario.id!)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

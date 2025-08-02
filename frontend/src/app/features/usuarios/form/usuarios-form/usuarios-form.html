@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Nome</label>
+    <input type="text" formControlName="nome" />
+    <div *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
+      <small *ngIf="form.get('nome')?.errors?.['required']">Nome é obrigatório.</small>
+      <small *ngIf="form.get('nome')?.errors?.['minlength']">Mínimo 10 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Perfis</label>
+    <select formControlName="perfis" multiple>
+      <option *ngFor="let perfil of perfis" [value]="perfil.id">{{ perfil.descricao }}</option>
+    </select>
+    <div *ngIf="form.get('perfis')?.invalid && form.get('perfis')?.touched">
+      <small>Selecione pelo menos um perfil.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">
+    {{ isEdit ? 'Atualizar' : 'Salvar' }}
+  </button>
+</form>
